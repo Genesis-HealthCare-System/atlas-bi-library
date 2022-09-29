@@ -8,66 +8,49 @@
 @section SideBar {}
 
 <form action="/Collections/New/" method="post">
-	<h1 class="title is-1">@ViewData["Title"]</h1>
+    <h1 class="title is-1">@ViewData["Title"]</h1>
 
-            <p class="buttons is-flex is-justify-content-space-between">
+    <p class="buttons is-flex is-justify-content-space-between">
         <a class="button p-5" href="/Collections/">
             <span class="icon">
-              <i class="fas fa-lg fa-left-long"></i>
+                <i class="fas fa-lg fa-left-long"></i>
             </span>
             <span><strong>Cancel</strong><br>Go Back</span>
         </a>
         <button class="button p-5" type="submit">
             <span><strong>Save</strong><br>and Continue</span>
             <span class="icon ">
-              <i class="fas fa-lg fa-right-long"></i>
+                <i class="fas fa-lg fa-right-long"></i>
             </span>
         </button>
     </p>
 
-        <div class="field">
-            <label class="label">Name</label>
-            <div class="control">
-                <input class="input" placeholder="e.g Data Sorting" asp-for="Collection.Name" required/>
-            </div>
+    <div class="field">
+        <label class="label">Name</label>
+        <div class="control">
+            <input class="input" placeholder="e.g Data Sorting" asp-for="Collection.Name" required />
         </div>
+    </div>
 
-        <div class="field">
-            <label class="label">Purpose</label>
-            <div class="editor" data-inputName="Collection.Purpose" data-inputId="Collection_Purpose"><textarea></textarea></div>
-        </div>
+    <div class="field">
+        <label class="label">Purpose</label>
+        <textarea class="textarea" asp-for="Collection.Purpose"></textarea>
+    </div>
 
-        <div class="field">
-            <label class="label">Description</label>
-            <div class="editor" data-inputName="Collection.Description" data-inputId="Collection_Description"><textarea></textarea></div>
-        </div>
+    <div class="field">
+        <label class="label">Description</label>
+        <textarea class="textarea" asp-for="Collection.Description"></textarea>
+    </div>
 
-        <div class="field">
-            <label class="label">Linked Terms</label>
-            <div class="mini-tags field is-grouped is-grouped-multiline">
-            </div>
-            <div class="field">
-                <div class="control is-relative is-expanded">
-                    <input class="input input-mini" placeholder="search for terms.." search-area="TermSearch" />
-                    <select class="is-hidden" asp-for="Terms" >
-                    </select>
-                    <div class="mini">
-                        <div class="mini-waiting">
-                            <span class="icon">
-                                <i class="fas fa-circle-notch fa-spin"></i>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="field">
-        <label class="label">Linked Reports</label>
+    <div class="field">
+        <label class="label">Linked Terms</label>
         <div class="mini-tags field is-grouped is-grouped-multiline">
         </div>
         <div class="field">
             <div class="control is-relative is-expanded">
-                <input class="input input-mini multiselect" placeholder="search for reports.." search-area="ReportSearch" data-name="Reports[].ReportId"  />
+                <input class="input input-mini multiselect" placeholder="search for terms.." search-area="TermSearch" data-name="Terms[].TermId"/>
+                <select class="is-hidden" asp-for="Terms">
+                </select>
                 <div class="mini">
                     <div class="mini-waiting">
                         <span class="icon">
@@ -78,20 +61,39 @@
             </div>
         </div>
     </div>
+
+    <div class="field">
+        <label class="label">Linked Reports</label>
+        <div class="mini-tags field is-grouped is-grouped-multiline">
+        </div>
+        <div class="field">
+            <div class="control is-relative is-expanded">
+                <input class="input input-mini multiselect" placeholder="search for reports.." search-area="ReportSearch" data-name="Reports[].ReportId" />
+                <div class="mini">
+                    <div class="mini-waiting">
+                        <span class="icon">
+                            <i class="fas fa-circle-notch fa-spin"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
     <div class="step-tab-data" id="reports">
-    <p class="buttons is-flex is-justify-content-space-between">
-        <a class="button p-5 step-tab" href="#meta">
-            <span class="icon">
-              <i class="fas fa-lg fa-left-long"></i>
-            </span>
-            <span><strong>Back</strong><br>to Meta</span>
-        </a>
-        <button class="button p-5" type="submit">
-            <span><strong>Save</strong><br>and Continue</span>
-            <span class="icon ">
-              <i class="fas fa-lg fa-right-long"></i>
-            </span>
-        </button>
-    </p>
+        <p class="buttons is-flex is-justify-content-space-between">
+            <a class="button p-5 step-tab" href="#meta">
+                <span class="icon">
+                    <i class="fas fa-lg fa-left-long"></i>
+                </span>
+                <span><strong>Back</strong><br>to Meta</span>
+            </a>
+            <button class="button p-5" type="submit">
+                <span><strong>Save</strong><br>and Continue</span>
+                <span class="icon ">
+                    <i class="fas fa-lg fa-right-long"></i>
+                </span>
+            </button>
+        </p>
+    </div>
 </form>

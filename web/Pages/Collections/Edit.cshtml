@@ -39,12 +39,12 @@
 
     <div class="field">
         <label class="label">Purpose</label>
-        <div class="editor" data-inputName="Collection.Purpose" data-inputId="Collection_Purpose"><textarea class="textarea">@Html.Raw(Model.Collection.Purpose)</textarea></div>
+        <textarea class="textarea" asp-for="Collection.Purpose">@Html.Raw(Model.Collection.Purpose)</textarea>
     </div>
 
     <div class="field">
         <label class="label">Description</label>
-        <div class="editor" data-inputName="Collection.Description" data-inputId="Collection_Description"><textarea class="textarea">@Html.Raw(Model.Collection.Description)</textarea></div>
+        <textarea class="textarea" asp-for="Collection.Description">@Html.Raw(Model.Collection.Description)</textarea>
     </div>
 
     <div class="field toggle">

@@ -34,12 +34,12 @@
 
     <div class="field">
         <label class="label">Summary</label>
-        <div class="editor" data-inputName="Term.Summary" data-inputId="Term_Summary"><textarea></textarea></div>
+        <textarea class="textarea" asp-for="Term.Summary"></textarea>
     </div>
 
     <div class="field">
         <label class="label">Technical Definition</label>
-        <div class="editor" data-inputName="Term.TechnicalDefinition" data-inputId="Term_TechnicalDefinition"><textarea></textarea></div>
+        <textarea class="textarea" asp-for="Term.TechnicalDefinition"></textarea>
     </div>
 
     @if (User.HasPermission("Approve Terms"))

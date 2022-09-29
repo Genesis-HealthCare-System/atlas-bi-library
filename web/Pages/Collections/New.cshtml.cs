@@ -3,6 +3,7 @@ using Atlas_Web.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.EntityFrameworkCore;
 
 namespace Atlas_Web.Pages.Collections
 {
@@ -21,7 +22,10 @@ namespace Atlas_Web.Pages.Collections
         public Collection Collection { get; set; }
 
         [BindProperty]
-        public int[] Terms { get; set; }
+        public List<CollectionTerm> Terms { get; set; }
+
+        [BindProperty]
+        public List<CollectionReport> Reports { get; set; }
 
         public IActionResult OnGet()
         {
@@ -57,6 +61,7 @@ namespace Atlas_Web.Pages.Collections
             // update last update values & values that were posted
             Collection.LastUpdateUser = User.GetUserId();
             Collection.LastUpdateDate = DateTime.Now;
+            Collection.CollectionTerms = Terms;
 
             _context.Add(Collection);
             await _context.SaveChangesAsync();

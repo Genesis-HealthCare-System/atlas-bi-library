@@ -315,6 +315,23 @@ namespace Atlas_Web.Pages.Users
             HttpContext.Response.Headers.Add("Pragma", "no-cache"); // HTTP 1.0.
             HttpContext.Response.Headers.Add("Expires", "0"); // Proxies.
 
+            //ViewData["SharedToMe"] = (
+            //     from o in _context.SharedItems
+            //     where o.SharedToUserId == User.GetUserId()
+            //     orderby o.ShareDate descending
+            //     select new SharedObjectsData
+            //     {
+            //         Id = o.Id,
+            //         Name = o.Name,
+            //         ShareDate =
+            //             o.ShareDate == null
+            //                 ? null
+            //                 : (o.ShareDate ?? DateTime.Now).ToString("M/d/yyyy"),
+            //         SharedFrom = o.SharedFromUser.FullnameCalc,
+            //         Url = o.Url
+            //     }
+            //    ).ToList();
+
             var sharedToMeList = (
                 from o in _context.SharedItems
                 where o.SharedToUserId == User.GetUserId()
