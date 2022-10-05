@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Atlas_Web.Models;
@@ -31,7 +31,7 @@ namespace Atlas_Web.Pages.Initiatives
                     "initiative-" + id,
                     cacheEntry =>
                     {
-                        cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(20);
+                        cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5);
 
                         return _context.Initiatives
                             .Include(x => x.Collections)
@@ -57,7 +57,7 @@ namespace Atlas_Web.Pages.Initiatives
                 "initiatives",
                 cacheEntry =>
                 {
-                    cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(20);
+                    cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5);
 
                     return _context.Initiatives
                         .Include(x => x.Collections)

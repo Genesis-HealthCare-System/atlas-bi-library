@@ -41,24 +41,31 @@ namespace Atlas_Web.Pages.Terms
             {
                 Terms = await _cache.GetOrCreateAsync<List<Term>>(
                     "terms",
-                    cacheEntry =>
+                    async cacheEntry =>
                     {
                         cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(20);
-                        return _context.Terms
+                        var terms = await _context.Terms
                             .Include(x => x.ApprovedByUser)
                             .Include(x => x.UpdatedByUser)
                             .Include(x => x.StarredTerms)
+                            //.OrderByDescending(x => x.ApprovedYn).ThenBy(x => x.Name)
                             .AsNoTracking()
                             .ToListAsync();
+
+                        var tempTerms = terms.Where(x => x.ApprovedYn == "Y").OrderBy(x => x.Name).ToList();
+                        tempTerms.AddRange(terms.Where(x => x.ApprovedYn != "Y").OrderBy(x => x.Name).ToList());
+                        terms = tempTerms;
+
+                        return terms;
                     }
                 );
 
-                return Page();
+                return Page(); 
             }
 
             Term = await _cache.GetOrCreateAsync<Term>(
                 "term-" + id,
-                cacheEntry =>
+                cacheEntry => 
                 {
                     cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(20);
                     return _context.Terms

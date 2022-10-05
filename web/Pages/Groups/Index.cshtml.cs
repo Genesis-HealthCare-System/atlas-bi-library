@@ -58,7 +58,7 @@ namespace Atlas_Web.Pages.Groups
                 "Group-" + id,
                 cacheEntry =>
                 {
-                    cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(20);
+                    cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5);
                     return (
                         from a in _context.UserGroups
                         where a.GroupId == id
@@ -79,7 +79,7 @@ namespace Atlas_Web.Pages.Groups
                 "GroupUsers-" + id,
                 cacheEntry =>
                 {
-                    cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(20);
+                    cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5);
                     return (
                         from a in _context.UserGroupsMemberships
                         where a.GroupId == id
@@ -100,7 +100,7 @@ namespace Atlas_Web.Pages.Groups
                 "GroupReports-" + id,
                 cacheEntry =>
                 {
-                    cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(20);
+                    cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5);
                     return (
                         from a in _context.ReportGroupsMemberships
                         where a.GroupId == id

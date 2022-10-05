@@ -30,10 +30,10 @@ namespace Atlas_Web.Pages.Collections
             {
                 Collection = await _cache.GetOrCreateAsync<Collection>(
                     "collection-" + id,
-                    cacheEntry =>
+                    async cacheEntry =>
                     {
-                        cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(20);
-                        return _context.Collections
+                        cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5);
+                        var items = await _context.Collections
                             .Include(x => x.LastUpdateUserNavigation)
                             .Include(x => x.CollectionTerms)
                             .ThenInclude(x => x.Term)
@@ -64,8 +64,14 @@ namespace Atlas_Web.Pages.Collections
                             .ThenInclude(x => x.ReportObjectHierarchyChildReportObjects)
                             .ThenInclude(x => x.ParentReportObject)
                             .ThenInclude(x => x.ReportGroupsMemberships)
-                            .AsNoTracking()
+                            .AsNoTracking()                            
                             .SingleAsync(x => x.CollectionId == id);
+
+                        var tempCollectionTerms = items.CollectionTerms.Where(x => x.Term.ApprovedYn == "Y").OrderBy(x => x.Term.Name).ToList();
+                        tempCollectionTerms.AddRange(items.CollectionTerms.Where(x => x.Term.ApprovedYn != "Y").OrderBy(x => x.Term.Name).ToList());
+                        items.CollectionTerms = tempCollectionTerms;
+
+                        return items;
                     }
                 );
 
@@ -79,8 +85,8 @@ namespace Atlas_Web.Pages.Collections
                 "collections",
                 cacheEntry =>
                 {
-                    cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(20);
-                    return _context.Collections.Include(x => x.StarredCollections).ToListAsync();
+                    cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5);
+                    return _context.Collections.Include(x => x.StarredCollections).OrderBy(x => x.Name).ToListAsync();
                 }
             );
 

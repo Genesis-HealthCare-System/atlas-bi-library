@@ -47,7 +47,7 @@ namespace Atlas_Web.Pages.Collections
                 return RedirectToPage(
                     "/Collections/Index",
                     new { error = "You do not have permission to access that page." }
-                );
+                ); 
             }
 
             if (!ModelState.IsValid)

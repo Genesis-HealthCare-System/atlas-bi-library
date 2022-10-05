@@ -46,7 +46,7 @@ namespace Atlas_Web.Pages.Reports
                 "report-" + id,
                 cacheEntry =>
                 {
-                    cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(20);
+                    cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5);
 
                     return _context.ReportObjects
                         /* run the 1:1 as a single query */
@@ -104,7 +104,7 @@ namespace Atlas_Web.Pages.Reports
                 "report-terms-" + id,
                 cacheEntry =>
                 {
-                    cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(20);
+                    cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5);
                     return _context.Terms
                         .Where(x => x.ReportObjectDocTerms.Any(x => x.ReportObjectId == id))
                         // from first children
@@ -185,7 +185,7 @@ namespace Atlas_Web.Pages.Reports
                 "report-comp-queries-" + id,
                 cacheEntry =>
                 {
-                    cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(20);
+                    cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5);
                     return _context.ReportObjectQueries
                         .Where(
                             x =>
@@ -211,7 +211,7 @@ namespace Atlas_Web.Pages.Reports
                 "report-children-" + id,
                 cacheEntry =>
                 {
-                    cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(20);
+                    cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5);
                     return _context.ReportObjects
                         .Where(
                             x =>
@@ -259,7 +259,7 @@ namespace Atlas_Web.Pages.Reports
                 "report-parents-" + id,
                 cacheEntry =>
                 {
-                    cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(20);
+                    cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5);
                     return _context.ReportObjects
                         .Where(
                             x =>
