@@ -4,7 +4,57 @@
 <h1 class="title is-1">@Model.Collection.Name</h1>
 <partial name="_Links" />
 
-@if(@Model.Collection.Initiative != null)
+<h2 class="title is-2" id="details">Details</h2>
+<div class="content">
+    @if (Model.Collection.Description != null)
+    {
+        <h3 class="title is-3">Description</h3>
+        <div class="markdown">
+            @Html.Raw(@Helpers.HtmlHelpers.MarkdownToHtml(Model.Collection.Description, Configuration))
+        </div>
+    }
+
+    @if (Model.Collection.Purpose != null)
+    {
+        <h3 class="title is-3">Search Summary</h3>
+        <div class="markdown">
+            @Html.Raw(@Helpers.HtmlHelpers.MarkdownToHtml(Model.Collection.Purpose, Configuration))
+        </div>
+    }
+</div>
+
+<div class="table-container mt-4">
+    <table class="table is-narrow" aria-label="details">
+        <tbody>
+            <tr>
+                <td>Last Updated By</td>
+                <td>
+                    @if (User.HasPermission("View Other User") && @Configuration["features:enable_user_profile"] == null || @Configuration["features:enable_user_profile"].ToString().ToLower() == "true")
+                    {
+                        <a href="/users?id=@Model.Collection.LastUpdateUser">@Model.Collection.LastUpdateUserNavigation.FullnameCalc</a>
+                    }
+                    else
+                    {
+                        @Model.Collection.LastUpdateUserNavigation.FullnameCalc
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>Last Updated</td>
+                <td>@Model.Collection.LastUpdatedDateDisplayString</td>
+            </tr>
+            @if (Model.Collection.Hidden == "Y")
+            {
+                <tr>
+                    <td>Hidden from Search?</td>
+                    <td>Yes</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@if (@Model.Collection.Initiative != null)
 {
     <h2 class="title is-2" id="reports">Owning Initiative</h2>
     <div class="columns is-multiline">
@@ -43,52 +93,3 @@
         </div>
     }
 }
-
-<h2 class="title is-2" id="details">Details</h2>
-<div class="content">
-@if(Model.Collection.Description != null)
-{
-    <h3 class="title is-3">Description</h3>
-    <div class="markdown">
-        @Html.Raw(@Helpers.HtmlHelpers.MarkdownToHtml(Model.Collection.Description, Configuration))
-    </div>
-}
-
-@if(Model.Collection.Purpose != null)
-{
-    <h3 class="title is-3">Search Summary</h3>
-    <div class="markdown">
-        @Html.Raw(@Helpers.HtmlHelpers.MarkdownToHtml(Model.Collection.Purpose, Configuration))
-    </div>
-}
-</div>
-
-<div class="table-container mt-4">
-    <table class="table is-narrow" aria-label="details">
-        <tbody>
-            <tr>
-                <td>Last Updated By</td>
-                <td>
-                    @if (User.HasPermission("View Other User") && @Configuration["features:enable_user_profile"] == null || @Configuration["features:enable_user_profile"].ToString().ToLower() == "true")
-                    {
-                        <a href="/users?id=@Model.Collection.LastUpdateUser">@Model.Collection.LastUpdateUserNavigation.FullnameCalc</a>
-                    } else
-                    {
-                        @Model.Collection.LastUpdateUserNavigation.FullnameCalc
-                    }
-                </td>
-            </tr>
-            <tr>
-                <td>Last Updated</td>
-                <td>@Model.Collection.LastUpdatedDateDisplayString</td>
-            </tr>
-            @if (Model.Collection.Hidden == "Y")
-            {
-                <tr>
-                    <td>Hidden from Search?</td>
-                    <td>Yes</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
