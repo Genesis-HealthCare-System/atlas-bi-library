@@ -5,7 +5,7 @@
     <span>@Model.Term.Name</span>
     @if (@Model.Term.ApprovedYn == "Y")
     {
-        <span class="tag is-success">Approved</span>
+        <span class="tag is-success">Certified</span>
     }
 </h1>
 
@@ -54,11 +54,11 @@
             @if (Model.Term.ApprovedYn == "Y")
             {
                 <tr>
-                    <td>Approval Date</td>
+                    <td>Certified Date</td>
                     <td>@Model.Term.ApprovalDateTimeDisplayString</td>
                 </tr>
                 <tr>
-                    <td>Approved By</td>
+                    <td>Certified By</td>
                     <td>
                         @if (User.HasPermission("View Other User") && @Configuration["features:enable_user_profile"] == null || @Configuration["features:enable_user_profile"].ToString().ToLower() == "true")
                         {

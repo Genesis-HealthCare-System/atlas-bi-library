@@ -26,9 +26,9 @@ namespace Atlas_Web.Services
 
                 if (_env.IsDevelopment())
                 {
-                    smtp.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
-                    smtp.PickupDirectoryLocation = @"c:\maildump";
-                    smtp.EnableSsl = false;
+                    //smtp.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
+                    //smtp.PickupDirectoryLocation = @"c:\maildump";
+                    //smtp.EnableSsl = false;
                 }
 
                 var message = new System.Net.Mail.MailMessage
